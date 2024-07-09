@@ -3,7 +3,7 @@
 Use this template to start writing data applications on Snowflake using Python.
 
 # Set up snowcli < from [documentation](https://docs.snowflake.com/en/developer-guide/snowflake-cli-v2/installation/installation) >
-## woth watching videos https://www.youtube.com/@snowflakedevelopers/playlists
+## worth watching videos https://www.youtube.com/@snowflakedevelopers/playlists
 
 brew tap snowflakedb/snowflake-cli
 brew update

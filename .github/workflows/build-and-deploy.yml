@@ -9,12 +9,12 @@ on:
   workflow_dispatch:
 
 env:
-  SNOWSQL_ACCOUNT: ${{ secrets.SNOWSQL_ACCOUNT }}
-  SNOWSQL_USER: ${{ secrets.SNOWSQL_USER }}
-  SNOWSQL_PWD: ${{ secrets.SNOWSQL_PWD }}
-  SNOWSQL_DATABASE: ${{ secrets.SNOWSQL_DATABASE }}
-  SNOWSQL_SCHEMA: ${{ secrets.SNOWSQL_SCHEMA }}
-  SNOWSQL_WAREHOUSE: ${{ secrets.SNOWSQL_WAREHOUSE }}
+  # SNOWSQL_ACCOUNT: ${{ secrets.SNOWSQL_ACCOUNT }}
+  # SNOWSQL_USER: ${{ secrets.SNOWSQL_USER }}
+  # SNOWSQL_PWD: ${{ secrets.SNOWSQL_PWD }}
+  # SNOWSQL_DATABASE: ${{ secrets.SNOWSQL_DATABASE }}
+  # SNOWSQL_SCHEMA: ${{ secrets.SNOWSQL_SCHEMA }}
+  # SNOWSQL_WAREHOUSE: ${{ secrets.SNOWSQL_WAREHOUSE }}
   ARTIFACT_NAME: python-sources-${{ github.ref_name }}.zip
 
 jobs:
@@ -25,6 +25,9 @@ jobs:
         shell: bash -el {0}
     steps:
       - uses: actions/checkout@v3
+
+      - name: Run a script using secrets
+        run: echo "The secret is ${{ secrets.API_KEY }}"
 
       - name: Setup Conda
         uses: conda-incubator/setup-miniconda@v2.2.0
