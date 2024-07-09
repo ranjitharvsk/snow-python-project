@@ -24,16 +24,16 @@ jobs:
       run:
         shell: bash -el {0}
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Run a script using secrets
-        run: echo "The secret is ${{ secrets.API_KEY }}"
+      - uses: actions/checkout@v2
 
       - name: Setup Conda
         uses: conda-incubator/setup-miniconda@v2.2.0
         with:
           activate-environment: snowpark
           environment-file: environment.yml
+
+      - name: Run a script using secrets
+        run: echo "The secret is ${{ secrets.API_KEY }}"
 
       - name: Run tests
         run: python -m pytest 
