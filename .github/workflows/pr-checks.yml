@@ -9,12 +9,12 @@ permissions:
   contents: read
 
 env:
-  SNOWSQL_ACCOUNT: ${{ secrets.SNOWSQL_ACCOUNT }}
-  SNOWSQL_USER: ${{ secrets.SNOWSQL_USER }}
-  SNOWSQL_PWD: ${{ secrets.SNOWSQL_PWD }}
-  SNOWSQL_DATABASE: ${{ secrets.SNOWSQL_DATABASE }}
-  SNOWSQL_SCHEMA: ${{ secrets.SNOWSQL_SCHEMA }}
-  SNOWSQL_WAREHOUSE: ${{ secrets.SNOWSQL_WAREHOUSE }}
+  ACCOUNT: ${{ secrets.ACCOUNT }}
+  USER: ${{ secrets.USER }}
+  PASSWORD: ${{ secrets.PASSWORD }}
+  DATABASE: ${{ secrets.DATABASE }}
+  SCHEMA: ${{ secrets.SCHEMA }}
+  WAREHOUSE: ${{ secrets.WAREHOUSE }}
 
 defaults:
   run:
