@@ -1,8 +1,3 @@
-"""
-An example stored procedure. __main__ provides an entrypoint for local development
-and testing.
-"""
-
 from snowflake.snowpark.session import Session
 from snowflake.snowpark.dataframe import col, DataFrame
 from snowflake.snowpark.functions import udf
@@ -13,26 +8,14 @@ def run(snowpark_session: Session) -> DataFrame:
     A sample stored procedure which creates a small DataFrame, prints it to the
     console, and returns the number of rows in the table.
     """
+    snowpark_session.sql("use database CBA_CODECHALLENGE")
+    df_table = session.table("public.ELECTRIC_CHARGEPOINTS_2017")
 
-    combine_udf = udf(functions.combine)
-
-    schema = ["col_1", "col_2"]
-
-    data = [
-        ("Welcome to ", "Snowflake!"),
-        ("Learn more: ", "https://www.snowflake.com/snowpark/"),
-    ]
-
-    df = snowpark_session.create_dataframe(data, schema)
-
-    df2 = df.select(combine_udf(col("col_1"), col("col_2")).as_("hello_world")).sort(
-        "hello_world", ascending=False
-    )
-
-    return df2
-
-
-
+    df_sql = session.sql("""SELECT a.* from public.ELECTRIC_CHARGEPOINTS_2017 a
+                            WHERE a.PLUGINDURATION = (select max(b.PLUGINDURATION) from public.ELECTRIC_CHARGEPOINTS_2017 b )
+                         """)
+    
+    return df_sql 
 
 if __name__ == "__main__":
     # This entrypoint is used for local development (`$ python src/procs/app.py`)
@@ -42,9 +25,12 @@ if __name__ == "__main__":
     print("Creating session...")
     session = Session.builder.configs(get_env_var_config()).create()
     session.add_import(functions.__file__, 'src.functions')
-
+    
+    
     print("Running stored procedure...")
     result = run(session)
 
     print("Stored procedure complete:")
     result.show()
+    
+    result.write.mode("overwrite").save_as_table("public.max_pluginduration")

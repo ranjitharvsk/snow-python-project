@@ -2,6 +2,56 @@
 
 Use this template to start writing data applications on Snowflake using Python.
 
+# Set up snowcli < from [documentation](https://docs.snowflake.com/en/developer-guide/snowflake-cli-v2/installation/installation) >
+## woth watching videos https://www.youtube.com/@snowflakedevelopers/playlists
+
+brew tap snowflakedb/snowflake-cli
+brew update
+
+brew install snowflake-cli
+
+snow --help
+
+snow --info  
+# to see the path that has config.toml
+# open config.toml file to create the conection details and default connection
+# add the following to the toml
+
+default_connection_name = "trial1"
+
+[connections.trial1]
+account = "gcavadk-gk73809"
+user = "RANJITHARVSK"
+password = "********"
+database = "CBA_CODECHALLENGE"
+schema = "PUBLIC"
+warehouse = "COMPUTE_WH"
+role = "ACCOUNTADMIN"
+
+
+# configring the default connection from terminal
+snow connection set-default trial1
+# you see the message "Default connection set to: trial"
+# this is going to be the default connection when ever we are going to use connection name in CLI
+
+# test the connection and see everything has been successfully configured
+snow connection test --connection trial1
+# The output should be
++----------------------------------------------------------+
+| key             | value                                  |
+|-----------------+----------------------------------------|
+| Connection name | trial1                                 |
+| Status          | OK                                     |
+| Host            | gcavadk-gk73809.snowflakecomputing.com |
+| Account         | gcavadk-gk73809                        |
+| User            | RANJITHARVSK                           |
+| Role            | ACCOUNTADMIN                           |
+| Database        | CBA_CODECHALLENGE                      |
+| Warehouse       | COMPUTE_WH                             |
++----------------------------------------------------------+
+
+
+
 ## Setup
 
 Set the following environment variables with your Snowflake account information:
@@ -26,6 +76,23 @@ $env:SNOWSQL_PWD = "<replace with your password>"
 $env:SNOWSQL_DATABASE = "<replace with your database>"
 $env:SNOWSQL_SCHEMA = "<replace with your schema>"
 $env:SNOWSQL_WAREHOUSE = "<replace with your warehouse>"
+
+# [connections.trial1]
+# account = "gcavadk-gk73809"
+# user = "RANJITHARVSK"
+# password = "*********"
+# database = "CBA_CODECHALLENGE"
+# schema = "PUBLIC"
+# warehouse = "COMPUTE_WH"
+# role = "ACCOUNTADMIN"
+export SNOWSQL_ACCOUNT=gcavadk-gk73809
+export SNOWSQL_USER=RANJITHARVSK
+export SNOWSQL_ROLE=ACCOUNTADMIN
+export SNOWSQL_PWD=********
+export SNOWSQL_DATABASE=CBA_CODECHALLENGE
+export SNOWSQL_SCHEMA=PUBLIC
+export SNOWSQL_WAREHOUSE=COMPUTE_WH
+
 ```
 
 Optional: You can set this env var permanently by editing your bash profile (on Linux/MacOS) or 
